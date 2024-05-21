@@ -22,7 +22,6 @@ module YoutubeCaptions
 
       response = self.class.get(lang_info["baseUrl"])
       captions = response["transcript"]["text"]
-      p captions
 
       clean_captions(captions)
     end
