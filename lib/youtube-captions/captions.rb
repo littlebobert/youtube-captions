@@ -29,7 +29,7 @@ module YoutubeCaptions
     private
 
     def default_lang_info
-      info.find {|json| json["kind"] == "asr"} || info.first
+      info.find {|json| json["kind"] == "user"} || info.first
     end
 
     def search_lang_info
