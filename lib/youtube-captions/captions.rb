@@ -29,11 +29,11 @@ module YoutubeCaptions
     private
 
     def default_lang_info
-      info.find {|json| json["kind"] != "asr"} || info.first
+      info.find {|json| json["kind"] != "asr" } || info.first
     end
 
     def search_lang_info
-      info.find { |json| json["vssId"] == ".#{lang}"} || info.find {|json| json["vssId"] == "a.#{lang}" }
+      info.find { |json| json["vssId"] == ".#{lang}" && json["kind"] != "asr" } || info.find {|json| json["vssId"] == "a.#{lang}" && json["kind"] != "asr" }
     end
 
     def lang_info_has_base_url?(lang_info)
