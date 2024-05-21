@@ -43,7 +43,10 @@ module YoutubeCaptions
 
     def clean_captions(captions)
       captions.map do |caption|
-        caption.tap { |caption_hash| caption_hash["__content__"] = CGI.unescapeHTML(caption_hash["__content__"]).split.join(" ") }
+        caption.tap { |caption_hash|
+          p caption_hash
+          caption_hash["__content__"] = CGI.unescapeHTML(caption_hash["__content__"]).split.join(" ")
+        }
       end
     end
   end
