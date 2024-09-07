@@ -17,12 +17,13 @@ module YoutubeCaptions
       else
         lang_info = search_lang_info
       end
-
+      puts "inside Captions::call. lang_info: #{lang_info}"
       return raise LangNotAvailableError.new("Lang no available") unless lang_info_has_base_url?(lang_info)
 
       response = self.class.get(lang_info["baseUrl"])
+      puts "response was: #{response}"
       captions = response["transcript"]["text"]
-
+      puts "captions were: #{captions}"
       clean_captions(captions)
     end
 
