@@ -1,8 +1,8 @@
-require 'httparty'
+require 'nokogiri'
+require 'open-uri'
 
 module YoutubeCaptions
   class Info
-    include HTTParty
 
     attr_reader :id
     def initialize(id:)
@@ -11,7 +11,7 @@ module YoutubeCaptions
 
     def call
       puts "connecting"
-      youtube_html = self.class.get("#{YoutubeCaptions::YOUTUBE_VIDEO_URL}#{id}")
+      youtube_html = Nokogiri::HTML(URI.open("#{YoutubeCaptions::YOUTUBE_VIDEO_URL}#{id}"))
       puts "received html: #{youtube_html}"
       match_data = youtube_html.match(YoutubeCaptions::CAPTIONABLE_REGEX)
       puts "found matches: #{match_data}"
