@@ -11,9 +11,8 @@ module YoutubeCaptions
 
     def call
       puts "connecting"
-      youtube_html = Nokogiri::HTML(URI.open("#{YoutubeCaptions::YOUTUBE_VIDEO_URL}#{id}"))
+      youtube_html = Nokogiri::HTML(URI.open("#{YoutubeCaptions::YOUTUBE_VIDEO_URL}#{id}")).inner_html
       puts "received html: #{youtube_html}"
-      binding.break
       match_data = youtube_html.match(YoutubeCaptions::CAPTIONABLE_REGEX)
       puts "found matches: #{match_data}"
       return raise NoCaptionsAvailableError.new("No captions available") unless match_data
